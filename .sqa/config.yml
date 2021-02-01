@@ -1,0 +1,21 @@
+# .sqa/config.yml - jenkins-pipeline-library configuration file
+config:
+  project_repos:
+    saps-common:
+      repo: 'https://github.com/EOSC-synergy/saps-common'
+      branch: develop
+
+sqa_criteria:
+   qc_style:
+     repos:
+       saps-common:
+         container: common-testing
+         commands:
+           - mvn -f /saps-common-repo/pom.xml spotless:check
+   qc_coverage:
+     repos:
+       saps-common:
+         container: common-testing
+         commands:
+           - mvn -f /saps-common-repo/pom.xml -B -DskipTests clean package
+           - mvn -f /saps-common-repo/pom.xml test
